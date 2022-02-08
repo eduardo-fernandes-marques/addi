@@ -5,9 +5,9 @@
   "scripts": {
     "test": "jest --config .internals/tests/jest.config.js --coverage",
     "start": "react-app-rewired start",
-    "build": "concurrently \"npm run build:prd\" \"npm run build:non-prd\"",
-    "build:prd": "react-app-rewired build",
-    "build:non-prd": "react-app-rewired build --profile",
+    "build": "yarn build:prd & yarn build:non-prd",
+    "build:prd": "cross-env REACT_APP_PRD=true REACT_APP_OUTPUT_PATH=build/prd react-app-rewired build",
+    "build:non-prd": "cross-env REACT_APP_PRD=false REACT_APP_OUTPUT_PATH=build/non-prd react-app-rewired build --profile",
     "lint": "eslint . --ext .js,.ts,.tsx,.jsx",
     "storybook": "start-storybook -c .internals/storybook -s ./public -p 3003",
     "storybook:build": "build-storybook -c .internals/storybook -o .internals/storybook/out"
@@ -72,7 +72,7 @@
     "@typescript-eslint/parser": "^5.11.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.5.0",
-    "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "5.2.6",
     "customize-cra": "^1.0.0",
     "eslint": "^8.8.0",

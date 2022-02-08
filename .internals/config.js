@@ -14,7 +14,7 @@ module.exports = {
     addBundleVisualizer({}, true)
   ),
   paths: (paths) => {
-    paths.appBuild = path.resolve(__dirname, '..', 'build');
+    paths.appBuild = path.resolve(__dirname, '..', process.env.REACT_APP_OUTPUT_PATH || 'build');
 
     return paths;
   },
