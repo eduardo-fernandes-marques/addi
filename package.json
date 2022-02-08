@@ -40,23 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "#(.*)$": "<rootDir>/src/$1",
-      "^.+\\.scss$": "identity-obj-proxy"
-    },
-    "coverageDirectory": "<rootDir>/.internals/coverage",
-    "setupFilesAfterEnv": [
-      "<rootDir>/.internals/setupTests.ts"
-    ],
-    "collectCoverageFrom": [
-      "<rootDir>/src/**/*.{ts,tsx}",
-      "!<rootDir>/src/*.{ts,tsx}"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/src/containers/App",
-      "<rootDir>/src/containers/NotFound"
-    ]
   }
 }
