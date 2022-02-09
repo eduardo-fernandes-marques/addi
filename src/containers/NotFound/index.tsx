@@ -1,14 +1,5 @@
-type Props = {
-  props: [];
-};
-
-const NotFound: React.FC<Props> = ({ props, children }) => {
-  return (
-    <>
-      {children}
-      {props}
-    </>
-  );
+const NotFound: React.FC = () => {
+  return <div> Página não encontrada </div>;
 };
 
 export default NotFound;

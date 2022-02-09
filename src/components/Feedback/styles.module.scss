@@ -1,0 +1,14 @@
+@import "~@sicredi/styles/_variables.scss";
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-weight: $typographyWeightLight;
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+}

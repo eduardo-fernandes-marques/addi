@@ -7,7 +7,7 @@
     "start": "react-app-rewired start",
     "build": "yarn build:prd & yarn build:non-prd",
     "build:prd": "cross-env REACT_APP_PRD=true REACT_APP_OUTPUT_PATH=build/prd react-app-rewired build",
-    "build:non-prd": "cross-env REACT_APP_PRD=false REACT_APP_OUTPUT_PATH=build/non-prd react-app-rewired build --profile",
+    "build:non-prd": "cross-env REACT_APP_PRD=false REACT_APP_OUTPUT_PATH=build/non-prd REACT_APP_DEFAULT_ENV=dev react-app-rewired build --profile",
     "lint": "eslint . --ext .js,.ts,.tsx,.jsx",
     "storybook": "start-storybook -c .internals/storybook -s ./public -p 3003",
     "storybook:build": "build-storybook -c .internals/storybook -o .internals/storybook/out"
@@ -42,15 +42,20 @@
   ],
   "config-overrides-path": ".internals/config.js",
   "dependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.5",
     "@hot-loader/react-dom": "^17.0.2",
-    "ky": "^0.28.7",
-    "ky-universal": "^0.10.0",
+    "ky": "^0.23.0",
+    "ky-universal": "^0.8.1",
+    "miragejs": "^0.1.43",
     "react": "^17.0.2",
     "react-display-name": "^0.2.5",
     "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.4",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^6.2.1"
+    "react-hot-loader": "^4.13.0",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
+    "utility-types": "^3.10.0"
   },
   "devDependencies": {
     "@sheerun/mutationobserver-shim": "^0.3.3",
@@ -92,10 +97,8 @@
     "jest": "^27.5.0",
     "jest-localstorage-mock": "^2.4.18",
     "lint-staged": "^12.3.3",
-    "miragejs": "^0.1.43",
     "prettier": "^2.5.1",
     "react-app-rewired": "^2.1.11",
-    "react-hot-loader": "^4.13.0",
     "react-scripts": "^5.0.0",
     "sass": "^1.49.7",
     "sass-loader": "10.1.1",

@@ -1,12 +1,13 @@
-import { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
+import { ErrorBoundary } from '#/components/ErrorBoundary';
+import { App } from '#/containers/App';
+import { unmountRender } from '#/utils/unmountRender';
 
-import '#/index.scss';
-import App from '#/App';
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const ROOT = document.getElementById('root')!;
 
-ReactDOM.render(
-  <StrictMode>
+unmountRender(
+  <ErrorBoundary>
     <App />
-  </StrictMode>,
-  document.getElementById('root')
+  </ErrorBoundary>,
+  ROOT
 );
