@@ -2,7 +2,8 @@ import React, { useReducer } from 'react';
 import getDisplayName from 'react-display-name';
 import { Subtract } from 'utility-types';
 
-import { Feedback, Props as FeedbackProps } from '#/components/Feedback';
+import { Feedback, Props as FeedbackProps } from '@components/Feedback';
+import { EmojiSadIcon, EmojiHappyIcon } from '@components/Icons';
 
 type Type = 'ERROR' | 'SUCCEEDED';
 
@@ -30,7 +31,10 @@ const reducer = (state: State, action: Action) => {
     case 'ERROR': {
       return {
         ...state,
-        payload: { ...action.payload },
+        payload: {
+          ...action.payload,
+          icon: <EmojiSadIcon title="emoji-sad" aria-hidden="true" className="icon-info" />,
+        },
         type: action.type,
       };
     }
@@ -46,6 +50,7 @@ const reducer = (state: State, action: Action) => {
         ...state,
         payload: {
           ...action.payload,
+          icon: <EmojiHappyIcon title="emoji-happy" aria-hidden="true" className="icon-info" />,
         },
         type: action.type,
       };

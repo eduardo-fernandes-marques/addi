@@ -1,6 +1,7 @@
 import { useMemo, useReducer, useCallback } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 
+import { Layout } from '#/components/Layout';
 import { withFeedback, Props as WithFeedbackProps } from '#/hocs/withFeedback';
 import {
   getLeads,
@@ -112,15 +113,21 @@ export const Home: React.FC<Props> = ({ setException, setSucceeded, setError }) 
   if (error) setException('Error to get leads');
 
   return (
-    <Table
-      pages={state.pages}
-      size={state.pagination.size}
-      rows={data?.leads ?? []}
-      page={state.pagination.page + 1}
-      onProccess={handleClick}
-      onSort={(sort: SortProps) => dispatch({ payload: sort, type: 'SORT_CHANGE' })}
-      onChangePage={(page: number) => dispatch({ payload: page - 1, type: 'PAGE_CHANGE' })}
-    />
+    <Layout>
+      <Layout.Container>
+        <Layout.Content>
+          <Table
+            pages={state.pages}
+            size={state.pagination.size}
+            rows={data?.leads ?? []}
+            page={state.pagination.page + 1}
+            onProccess={handleClick}
+            onSort={(sort: SortProps) => dispatch({ payload: sort, type: 'SORT_CHANGE' })}
+            onChangePage={(page: number) => dispatch({ payload: page - 1, type: 'PAGE_CHANGE' })}
+          />
+        </Layout.Content>
+      </Layout.Container>
+    </Layout>
   );
 };
 

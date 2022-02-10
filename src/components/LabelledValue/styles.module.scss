@@ -1,0 +1,54 @@
+@import "@styles/variables";
+
+.labelled-value {
+  margin: 0;
+
+  > .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem * 2;
+    }
+
+    > dt,
+    > dd {
+      width: 100%;
+      margin: 0;
+    }
+
+    > dt {
+      color: $primary;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    > dd {
+      color: $primary;
+      font-size: 1rem;
+    }
+  }
+
+  &.-compact {
+    > .item {
+      align-items: flex-end;
+      border-bottom: 1px dotted $primary;
+      flex-direction: row;
+
+      > dt,
+      > dd {
+        color: $primary;
+      }
+
+      > dt {
+        font-weight: 300;
+      }
+
+      > dd {
+        text-align: right;
+        font-weight: 300;
+      }
+    }
+  }
+}

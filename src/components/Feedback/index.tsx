@@ -2,22 +2,24 @@ import React, { isValidElement } from 'react';
 
 import { Meta } from '#/components/Meta';
 
+import { Button } from '@components/Button';
+
 import styles from './styles.module.scss';
 
 export type Props = {
   icon: React.ReactNode;
   title: string;
   children: React.ReactNode;
-  // primaryButton?: React.ComponentProps<typeof Button>;
-  // secondaryButton?: React.ComponentProps<typeof Button>;
+  primaryButton?: React.ComponentProps<typeof Button>;
+  secondaryButton?: React.ComponentProps<typeof Button>;
 };
 
 export const Feedback: React.FC<Props> = ({
   icon,
   title,
   children,
-  // primaryButton,
-  // secondaryButton,
+  primaryButton,
+  secondaryButton,
 }) => {
   return (
     <>
@@ -30,25 +32,12 @@ export const Feedback: React.FC<Props> = ({
           {isValidElement(children) ? children : <p>{children}</p>}
         </div>
 
-        {/* {(primaryButton || secondaryButton) && (
+        {(primaryButton || secondaryButton) && (
           <>
-            {secondaryButton && (
-              <Button
-                ghost
-                appearance="primary"
-                data-testid="feedback-primary-button"
-                {...secondaryButton}
-              />
-            )}
-            {primaryButton && (
-              <Button
-                appearance="primary"
-                data-testid="feedback-secondary-button"
-                {...primaryButton}
-              />
-            )}
+            {secondaryButton && <Button ghost appearance="primary" {...secondaryButton} />}
+            {primaryButton && <Button appearance="primary" {...primaryButton} />}
           </>
-        )} */}
+        )}
       </div>
 
       <div />

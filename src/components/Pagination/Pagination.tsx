@@ -1,6 +1,8 @@
 import cn from 'clsx';
 import { useState } from 'react';
 
+import { ChevronLeftIcon, ChevronRightIcon } from '@components/Icons';
+
 import styles from './styles.module.scss';
 
 export type Props = {
@@ -126,7 +128,7 @@ const Pagination: React.FC<Props> = ({
               correctCurrentPage === 1 ? 'página' : `para página ${correctCurrentPage - 1}`
             }`}
           >
-            ICON
+            <ChevronLeftIcon title="chevron-left" />
           </button>
         </li>
         {pages.map(({ page, selected, key }) => (
@@ -160,7 +162,7 @@ const Pagination: React.FC<Props> = ({
                 : `para página ${correctCurrentPage + 1}`
             }`}
           >
-            ICON
+            <ChevronRightIcon title="chevron-right" />
           </button>
         </li>
       </ol>

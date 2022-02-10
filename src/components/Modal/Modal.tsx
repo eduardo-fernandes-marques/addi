@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import ReactModal, { Props as ReactModalProps } from 'react-modal';
 
 import { Button, Props as ButtonProps } from '@components/Button';
+import { PlusCircleIcon } from '@components/Icons';
 import { Title } from '@components/Title';
 
 import styles from './styles.module.scss';
@@ -70,7 +71,7 @@ const Modal: React.FC<Props> = ({
           aria-label="Fechar"
           data-close=""
         >
-          ICON
+          <PlusCircleIcon title="plus-circle" />
         </button>
       </div>
 
