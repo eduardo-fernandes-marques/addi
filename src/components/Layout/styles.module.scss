@@ -1,0 +1,68 @@
+@import "@styles/variables";
+
+.layout {
+  margin: auto;
+  opacity: 1;
+  display: flex;
+  max-width: 1366px;
+  transition: opacity 0.25s;
+  padding: #{1rem * 5} 0;
+
+  &.-full {
+    padding: #{1rem * 3} #{1rem * 3} #{1rem * 8};
+  }
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 30px;
+  position: relative;
+  max-width: 690px;
+}
+
+.wrapper {
+  display: flex;
+
+  > * {
+    flex: 1;
+    margin-right: #{1rem * 3};
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: $responsiveSm) {
+    flex-direction: column;
+
+    > * {
+      flex: auto;
+
+      &:not(:last-child) {
+        margin: 0 0 #{1rem * 2} 0;
+      }
+    }
+  }
+}
+
+@media (min-width: $responsiveLg) {
+  .content {
+    max-width: 610px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: calc(770px + 60px);
+  }
+}
+
+@media (min-width: $responsiveXLg) {
+  .content {
+    max-width: 630px;
+  }
+
+  .container {
+    max-width: calc(850px + 60px);
+  }
+}

@@ -1,0 +1,11 @@
+@import "./colors";
+@import "./fonts";
+@import "./responsive";
+@import "./placeholders";
+@import "./functions";
+
+$z-index: (
+  modal: 10,
+  loader: 40,
+  toast: 50
+);

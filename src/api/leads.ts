@@ -1,5 +1,7 @@
 import { request } from '#/utils/request';
 
+import { Order as OrderProps } from '@components/Table';
+
 export const getLeadsEndpoint = () => `leads`;
 export const getLeadByIdEndpoint = (id: string) => `leads/${id}`;
 export const validateStoreEndpoint = (id: string) => `leads/${id}/database`;
@@ -14,6 +16,7 @@ export type Lead = {
   updatedAt: string;
   prospect: boolean;
   score: number;
+  id: string;
 };
 
 export type Leads = {
@@ -23,6 +26,21 @@ export type Leads = {
 export type Name = {
   first: string;
   last: string;
+};
+
+export type Pagination = {
+  sort: Sort;
+  size: number;
+  page: number;
+};
+
+export type Sort = {
+  order: OrderProps;
+  sort: keyof typeof SORT;
+};
+
+export const SORT = {
+  updatedAt: 'updatedAt',
 };
 
 export const getLeads = async () => {
@@ -52,6 +70,8 @@ export const validate = async (id: string) => {
   ]);
 
   if (store && judicialRecord) {
-    getScore(id);
+    return (await getScore(id)) > 60;
   }
+
+  return false;
 };

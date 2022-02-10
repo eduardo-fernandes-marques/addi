@@ -31,7 +31,7 @@ export function routes(this: Server) {
 
   this.get(validateJudicialRecordEndpoint(':id'), () => Math.random() < 0.5);
 
-  this.get(validateStoreEndpoint(':id'), () => () => Math.random() < 0.5);
+  this.get(validateStoreEndpoint(':id'), () => Math.random() < 0.5);
 
   this.passthrough();
 }

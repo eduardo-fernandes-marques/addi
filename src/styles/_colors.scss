@@ -1,0 +1,20 @@
+$primary: #828a82;
+$secondary: #acb2ac;
+$terciary: #e4e4e4;
+$white: #fff;
+$black: #000;
+$error: #e60000;
+$success: #3fa110;
+$warning: #ffcd00;
+
+:export {
+  black: $black;
+  success: $success;
+  primary: $primary;
+  secondary: $secondary;
+  terciary: $terciary;
+  error: $error;
+  white: $white;
+  warning: $warning;
+  success: $success;
+}

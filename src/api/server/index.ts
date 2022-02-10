@@ -3,6 +3,7 @@ import { Server as MirageServer, Model } from 'miragejs';
 import { APPLICATION } from '#/constants';
 
 import { Lead } from '../leads';
+
 import fixtures from './fixtures.json';
 import { routes } from './routes';
 
@@ -12,7 +13,7 @@ export type { Request } from 'miragejs';
 
 export type Server = MirageServer;
 
-export function Server() {
+export const Server = () => {
   const server = new MirageServer({
     environment: process.env.NODE_ENV,
     fixtures: {
@@ -30,4 +31,4 @@ export function Server() {
   });
 
   return server;
-}
+};

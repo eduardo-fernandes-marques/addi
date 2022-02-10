@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:wght@300;400;500;700&display=swap");
+
+$typographyFamilyBase: "Montserrat", sans-serif !default;
+
+:export {
+  typographyFamilyBase: $typographyFamilyBase;
+}

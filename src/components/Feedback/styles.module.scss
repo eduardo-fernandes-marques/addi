@@ -1,11 +1,11 @@
-@import "~@sicredi/styles/_variables.scss";
+@import "@styles/_variables.scss";
 
 .content {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-weight: $typographyWeightLight;
+  font-weight: 300;
 
   p {
     margin: 0;

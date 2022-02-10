@@ -25,7 +25,7 @@ export type Props = {
   setException: (payload: string) => void;
 };
 
-function reducer(state: State, action: Action) {
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'ERROR': {
       return {
@@ -58,10 +58,10 @@ function reducer(state: State, action: Action) {
       return state;
     }
   }
-}
+};
 
-export function withFeedback<P extends Props = Props>(Component: React.ComponentType<P>) {
-  const WithFeedback: React.FunctionComponent<Subtract<P, Props>> = (props) => {
+export const withFeedback = <P extends Props = Props>(Component: React.ComponentType<P>) => {
+  const WithFeedback: React.FC<Subtract<P, Props>> = (props) => {
     const [state, dispatch] = useReducer(reducer, {});
 
     if (state?.type === 'EXCEPTION') throw new Error(state.payload);
@@ -82,4 +82,4 @@ export function withFeedback<P extends Props = Props>(Component: React.Component
   WithFeedback.displayName = `${getDisplayName(WithFeedback)}(${getDisplayName(Component)})`;
 
   return WithFeedback;
-}
+};

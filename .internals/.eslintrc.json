@@ -162,18 +162,23 @@
               "caseInsensitive": true,
               "order": "asc"
             },
-            "groups": ["builtin", "external", "internal", ["parent", "sibling"]],
+            "groups": ["builtin", "external", "internal", "parent", "sibling"],
             "newlines-between": "always",
             "pathGroups": [
               {
-                "pattern": "{@containers/**}",
-                "group": "internal",
-                "position": "before"
+                "pattern": "{@api/**}",
+                "group": "external",
+                "position": "after"
               },
               {
-                "pattern": "{@components/**}",
+                "pattern": "{@containers/**,@components/**}",
                 "group": "internal",
                 "position": "after"
+              },
+              {
+                "pattern": "{@styles/**}",
+                "group": "internal",
+                "position": "before"
               }
             ],
             "pathGroupsExcludedImportTypes": ["react+", "~"]

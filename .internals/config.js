@@ -9,6 +9,8 @@ module.exports = {
       '#': path.resolve(__dirname, '../src'),
       '@containers': path.resolve(__dirname, '../src/containers'),
       '@components': path.resolve(__dirname, '../src/components'),
+      '@styles': path.resolve(__dirname, '../src/styles'),
+      '@api': path.resolve(__dirname, '../src/api'),
       'react-dom': '@hot-loader/react-dom',
     }),
     addBundleVisualizer({}, true)

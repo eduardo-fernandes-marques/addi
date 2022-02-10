@@ -26,13 +26,13 @@ type Config = {
   onError?: () => void;
 };
 
-function setup(config?: Config) {
+const setup = (config?: Config) => {
   return render(
     <ErrorBoundary {...config}>
       <Component />
     </ErrorBoundary>
   );
-}
+};
 
 describe('components > ErrorBoundary', () => {
   it('should show fallback when some exception happen', () => {

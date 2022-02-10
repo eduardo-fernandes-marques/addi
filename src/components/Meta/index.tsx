@@ -8,7 +8,7 @@ export type Props = HelmetProps & {
 
 export const Meta: React.FC<Props> = ({ lang, title, children, description, ...props }) => {
   return (
-    <Helmet {...props} titleTemplate="%s - Sicredi">
+    <Helmet {...props} titleTemplate="Addi">
       {lang && <html lang={lang} />}
       {title && <title>{title}</title>}
       {description && <meta name="description" content={description} />}

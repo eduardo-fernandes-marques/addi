@@ -1,30 +1,127 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useMemo, useReducer, useCallback } from 'react';
+import useSWR, { useSWRConfig } from 'swr';
 
-import { getLeads, Leads, Lead, getLeadById } from '#/api/leads';
+import { withFeedback, Props as WithFeedbackProps } from '#/hocs/withFeedback';
+import {
+  getLeads,
+  getLeadsEndpoint,
+  validate,
+  Pagination as PaginationProps,
+  Sort as SortProps,
+  Lead as LeadProps,
+} from '@api/leads';
 
-type State = Leads & Lead;
+import { Table } from './Table';
 
-export const Home: React.FC = () => {
-  const [state, setState] = useState<State>();
+type Props = WithFeedbackProps;
 
-  const fetch = useCallback(async () => {
-    const lead = await getLeadById('1');
-    const { leads } = await getLeads();
+type Modal = {
+  id?: string;
+  show: boolean;
+};
 
-    setState((context) => ({ ...context, ...lead, leads }));
-  }, []);
+export type Params = {
+  id: string;
+};
 
-  useEffect(() => {
-    fetch();
-  }, [fetch]);
+export type Search = {
+  coop: string;
+};
+
+type State = {
+  modal: Modal;
+  pages?: number;
+  filter?: string;
+  pagination: PaginationProps;
+};
+
+type Action =
+  | { type: 'FETCH_FAILED' }
+  | { type: 'PAGE_CHANGE'; payload: number }
+  | { type: 'SORT_CHANGE'; payload: SortProps }
+  | { type: 'FILTER_CHANGED'; payload: string };
+
+const INITIAL_STATE: State = {
+  modal: { show: false },
+  pages: 0,
+  pagination: {
+    page: 0,
+    size: 5,
+    sort: {
+      order: 'ascending',
+      sort: 'updatedAt',
+    },
+  },
+};
+
+const reducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case 'PAGE_CHANGE':
+      return {
+        ...state,
+        pagination: { ...state.pagination, page: action.payload },
+      };
+
+    case 'SORT_CHANGE':
+      return {
+        ...state,
+        pagination: { ...state.pagination, sort: action.payload },
+      };
+
+    case 'FETCH_FAILED':
+      return { ...state, loading: false };
+
+    /* istanbul ignore next */
+    default:
+      return state;
+  }
+};
+
+export const Home: React.FC<Props> = ({ setException, setSucceeded, setError }) => {
+  const { mutate } = useSWRConfig();
+  const { data, error } = useSWR(getLeadsEndpoint(), getLeads);
+
+  const [state, dispatch] = useReducer(reducer, { ...INITIAL_STATE });
+
+  console.log(state, dispatch);
+
+  const loading = useMemo(() => !data && !error, [data, error]);
+
+  const handleClick = useCallback(
+    async (lead: LeadProps) => {
+      const { id, updatedAt } = lead;
+      const success = await validate(id);
+
+      if (success)
+        setSucceeded({
+          children: 'It has already been moved to prospects list.',
+          title: `Lead ${id} was processed to a prospect`,
+        });
+      else
+        setError({
+          children: `Lead will be blocker until ${updatedAt}`,
+          title: `Lead ${id} was not processed to a prospect`,
+        });
+
+      mutate(getLeadsEndpoint());
+    },
+    [mutate, setError, setSucceeded]
+  );
+
+  if (loading) return <div>Carregando...</div>;
+  if (error) setException('Error to get leads');
 
   return (
-    <div>
-      {state?.leads
-        ? state.leads.map(({ name }) => <div key={name.first}>{name.first}</div>)
-        : 'Não encontrado'}
-    </div>
+    <Table
+      pages={state.pages}
+      size={state.pagination.size}
+      rows={data?.leads ?? []}
+      page={state.pagination.page + 1}
+      onProccess={handleClick}
+      onSort={(sort: SortProps) => dispatch({ payload: sort, type: 'SORT_CHANGE' })}
+      onChangePage={(page: number) => dispatch({ payload: page - 1, type: 'PAGE_CHANGE' })}
+    />
   );
 };
 
-export default Home;
+export default withFeedback(Home);

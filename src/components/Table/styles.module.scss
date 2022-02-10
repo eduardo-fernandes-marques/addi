@@ -1,0 +1,136 @@
+@import "@styles/variables";
+
+$th-z-index: 2;
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  min-width: 770px;
+
+  > thead > tr > th,
+  > tbody > tr > td {
+    height: 56px;
+    text-align: left;
+    font-weight: 300;
+
+    &.-right {
+      text-align: right;
+    }
+
+    &.-left {
+      text-align: left;
+    }
+
+    &.-center {
+      text-align: center;
+    }
+
+    &.-actions {
+      padding: 0;
+      width: 64px;
+
+      > a,
+      > button {
+        width: 56px;
+        height: 56px;
+      }
+    }
+  }
+
+  > thead > tr > th {
+    border-top: none;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+
+    > button {
+      position: relative;
+      border: none;
+      outline: none;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+
+      &:not([disabled]) {
+        cursor: pointer;
+      }
+
+      > .icon {
+        margin-left: 1rem;
+        color: $primary;
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    &::before {
+      bottom: 0;
+      content: "";
+      height: 6px;
+      left: 0;
+      position: absolute;
+      transition: opacity 0.25s ease-in-out;
+      width: 100%;
+      opacity: 0;
+    }
+
+    &.-sticky {
+      z-index: $th-z-index;
+
+      &::before {
+        background: linear-gradient(180deg, $primary 0%, transparent 100%);
+        opacity: 1;
+      }
+    }
+  }
+
+  > tbody > tr {
+    &.-odd {
+      > td,
+      + tr[data-expanded-row] > td {
+        background: $white;
+      }
+    }
+
+    > td {
+      &.-empty {
+        text-align: center;
+      }
+
+      > button {
+        border-color: transparent;
+
+        > .icon {
+          transition: transform 0.25s;
+        }
+
+        &[aria-expanded="true"] {
+          > .icon {
+            transform: rotate(-180deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $responsiveXLg) {
+  .table {
+    min-width: 850px;
+  }
+}
+.table {
+  th[data-column=""] {
+    &[aria-sort="ascending"] .icon {
+      :global(.arrow-up-down_svg__up) {
+        fill: $primary;
+      }
+    }
+
+    &[aria-sort="descending"] .icon {
+      :global(.arrow-up-down_svg__down) {
+        fill: $primary;
+      }
+    }
+  }
+}

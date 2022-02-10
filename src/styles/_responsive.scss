@@ -1,0 +1,19 @@
+$xlg-media-query: 1920px;
+$lg-media-query: 1440px;
+$md-media-query: 1024px;
+$sm-media-query: 768px;
+$xs-media-query: 375px;
+$xxs-media-query: 320px;
+
+$responsiveSm: 576px;
+$responsiveMd: 768px;
+$responsiveLg: 1024px;
+$responsiveXLg: 1366px;
+
+/* stylelint-disable */
+:export {
+  responsiveSm: $responsiveSm;
+  responsiveMd: $responsiveMd;
+  responsiveLg: $responsiveLg;
+  responsiveXLg: $responsiveXLg;
+}
