@@ -7,7 +7,7 @@ export type Props = {
   value: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const Item: React.FC<Props> = ({ label, value, className, ...props }) => {
+export const Item: React.FC<Props> = ({ label, value, className, ...props }) => {
   return (
     <div className={cn(styles.item, className)} {...props}>
       <dt>{label}</dt>

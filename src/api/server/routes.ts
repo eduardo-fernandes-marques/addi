@@ -8,6 +8,8 @@ import {
   validateStoreEndpoint,
 } from '../leads';
 
+import fixtures from './fixtures.json';
+
 export function routes(this: Server) {
   this.get(getLeadByIdEndpoint(':id'), (schema, request) => {
     const { id } = request.params;
@@ -15,7 +17,18 @@ export function routes(this: Server) {
     return schema.find('leads', id);
   });
 
-  this.get(getLeadsEndpoint(), (schema) => schema.all('leads'));
+  this.get(getLeadsEndpoint(), (schema, { queryParams }) => {
+    const { models: results } = schema.all('leads');
+    const { pagination } = fixtures;
+
+    return {
+      pagination: {
+        ...pagination,
+        ...queryParams,
+      },
+      results,
+    };
+  });
 
   this.get(getScoreEndpoint(':id'), (schema, request) => {
     const { id } = request.params;

@@ -16,11 +16,6 @@ import { Table } from './Table';
 
 type Props = WithFeedbackProps;
 
-type Modal = {
-  id?: string;
-  show: boolean;
-};
-
 export type Params = {
   id: string;
 };
@@ -30,10 +25,8 @@ export type Search = {
 };
 
 type State = {
-  modal: Modal;
-  pages?: number;
   filter?: string;
-  pagination: PaginationProps;
+  pagination: Partial<PaginationProps>;
 };
 
 type Action =
@@ -43,8 +36,6 @@ type Action =
   | { type: 'FILTER_CHANGED'; payload: string };
 
 const INITIAL_STATE: State = {
-  modal: { show: false },
-  pages: 0,
   pagination: {
     page: 0,
     size: 5,
@@ -80,14 +71,34 @@ const reducer = (state: State, action: Action) => {
 
 export const Home: React.FC<Props> = ({ setException, setSucceeded, setError }) => {
   const { mutate } = useSWRConfig();
-  const { data, error } = useSWR(getLeadsEndpoint(), getLeads);
-
   const [state, dispatch] = useReducer(reducer, { ...INITIAL_STATE });
 
-  console.log(state, dispatch);
+  const { data, error } = useSWR(getLeadsEndpoint(), getLeads);
 
   const loading = useMemo(() => !data && !error, [data, error]);
 
+  const handleSort = useCallback(
+    (sort: SortProps) => {
+      dispatch({ payload: sort, type: 'SORT_CHANGE' });
+
+      mutate(
+        [getLeadsEndpoint(), { ...state.pagination, sort }],
+        getLeads({ ...state.pagination, sort })
+      );
+    },
+    [mutate, state.pagination]
+  );
+
+  const handlePageChange = useCallback(
+    (page: number) => {
+      dispatch({ payload: page - 1, type: 'PAGE_CHANGE' });
+
+      mutate(getLeadsEndpoint(), getLeads({ ...state.pagination, page }));
+    },
+    [mutate, state.pagination]
+  );
+
+  console.log('test: ', data?.pagination?.page);
   const handleClick = useCallback(
     async (lead: LeadProps) => {
       const { id, updatedAt } = lead;
@@ -104,9 +115,9 @@ export const Home: React.FC<Props> = ({ setException, setSucceeded, setError }) 
           title: `Lead ${id} was not processed to a prospect`,
         });
 
-      mutate(getLeadsEndpoint());
+      mutate([getLeadsEndpoint(), { ...state.pagination }], getLeads({ ...state.pagination }));
     },
-    [mutate, setError, setSucceeded]
+    [mutate, setError, setSucceeded, state.pagination]
   );
 
   if (loading) return <div>Carregando...</div>;
@@ -117,13 +128,14 @@ export const Home: React.FC<Props> = ({ setException, setSucceeded, setError }) 
       <Layout.Container>
         <Layout.Content>
           <Table
-            pages={state.pages}
-            size={state.pagination.size}
-            rows={data?.leads ?? []}
-            page={state.pagination.page + 1}
+            pagination={{
+              ...(data?.pagination as PaginationProps),
+              onChangePage: (page: number) => handlePageChange(page),
+              onSort: (sort: SortProps) => handleSort(sort),
+              page: data?.pagination?.page ?? 0,
+            }}
+            rows={data?.results ?? []}
             onProccess={handleClick}
-            onSort={(sort: SortProps) => dispatch({ payload: sort, type: 'SORT_CHANGE' })}
-            onChangePage={(page: number) => dispatch({ payload: page - 1, type: 'PAGE_CHANGE' })}
           />
         </Layout.Content>
       </Layout.Container>

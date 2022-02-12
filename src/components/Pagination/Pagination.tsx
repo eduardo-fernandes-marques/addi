@@ -123,7 +123,6 @@ const Pagination: React.FC<Props> = ({
             className={cn(styles.item)}
             disabled={correctCurrentPage === 1}
             onClick={handleChangePage('previous')}
-            data-testid="previous-page-button"
             aria-label={`Voltar ${
               correctCurrentPage === 1 ? 'página' : `para página ${correctCurrentPage - 1}`
             }`}
@@ -138,7 +137,6 @@ const Pagination: React.FC<Props> = ({
               className={cn(styles.item, {
                 [styles['-selected']]: selected,
               })}
-              data-testid={`pagination-page-${key}`}
               onClick={handleChangePage(page)}
               aria-hidden={typeof page !== 'number' ? 'true' : 'false'}
               aria-label={`${typeof page !== 'number' ? '' : `Ir para a página ${page}`}`}
@@ -155,7 +153,6 @@ const Pagination: React.FC<Props> = ({
             className={cn(styles.item)}
             disabled={correctCurrentPage === numberOfPages}
             onClick={handleChangePage('next')}
-            data-testid="next-page-button"
             aria-label={`Avançar ${
               correctCurrentPage === numberOfPages
                 ? 'página'

@@ -1,9 +1,9 @@
 import React, { useMemo, useCallback } from 'react';
 
-import { Sort as SortProps, Lead as LeadProps } from '@api/leads';
+import { Sort as SortProps, Lead as LeadProps, Pagination as PaginationProps } from '@api/leads';
 
 import { Button } from '@components/Button';
-import { Props as PaginationProps, Pagination } from '@components/Pagination';
+import { Props as InternalPaginationProps, Pagination } from '@components/Pagination';
 import {
   Props as TableProps,
   Column as ColumnProps,
@@ -14,21 +14,18 @@ import {
 
 export type Props = Omit<TableProps, 'columns'> & {
   rows: RowProps[];
-  size?: number;
-  page?: PaginationProps['currentPage'];
-  pages?: PaginationProps['numberOfPages'];
-  onChangePage?: PaginationProps['onChange'];
+
   onProccess: (lead: LeadProps) => void;
-  onSort: (sort: SortProps) => void;
+  pagination: PaginationProps & {
+    onChangePage: InternalPaginationProps['onChange'];
+    onSort: (sort: SortProps) => void;
+  };
 };
 
 export const Table: React.FC<Props> = ({
   rows = [],
-  onSort,
-  pages,
-  page,
-  onChangePage,
   onProccess,
+  pagination: { onSort, onChangePage, pages, page, size },
   ...props
 }) => {
   const handleSort = useMemo(
@@ -38,7 +35,7 @@ export const Table: React.FC<Props> = ({
 
   const buttonAction = useCallback(
     (lead: LeadProps) => {
-      return <Button onClick={() => onProccess(lead)} />;
+      return <Button onClick={() => onProccess(lead)}>Process</Button>;
     },
     [onProccess]
   );
@@ -58,7 +55,7 @@ export const Table: React.FC<Props> = ({
     },
     {
       accessor: (lead) => buttonAction(lead as LeadProps),
-      label: 'Proccess',
+      label: 'Action',
       width: '154px',
     },
   ];
@@ -66,7 +63,15 @@ export const Table: React.FC<Props> = ({
   return (
     <>
       <InternalTable rows={rows} columns={columns as ColumnProps[]} {...props} />
-      {!!pages && <Pagination currentPage={page} numberOfPages={pages} onChange={onChangePage} />}
+
+      <div>
+        <div>
+          <span>
+            Showing {size} de {pages}
+          </span>
+        </div>
+        {!!pages && <Pagination currentPage={page} numberOfPages={pages} onChange={onChangePage} />}
+      </div>
     </>
   );
 };

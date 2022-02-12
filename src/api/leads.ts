@@ -20,7 +20,8 @@ export type Lead = {
 };
 
 export type Leads = {
-  leads: Lead[];
+  results: Lead[];
+  pagination: Pagination;
 };
 
 export type Name = {
@@ -32,6 +33,7 @@ export type Pagination = {
   sort: Sort;
   size: number;
   page: number;
+  pages: number;
 };
 
 export type Sort = {
@@ -43,8 +45,20 @@ export const SORT = {
   updatedAt: 'updatedAt',
 };
 
-export const getLeads = async () => {
-  return request.get(getLeadsEndpoint()).json<Leads>();
+export const getLeads = async (searchParams?: Partial<Pagination>) => {
+  const {
+    sort: { sort, order },
+    ...rest
+  } = { sort: {} as Sort, ...searchParams };
+
+  return request
+    .get(getLeadsEndpoint(), {
+      searchParams: {
+        ...rest,
+        sort: `${sort}, ${order}`,
+      },
+    })
+    .json<Leads>();
 };
 
 export const getLeadById = async (id: string) => {
