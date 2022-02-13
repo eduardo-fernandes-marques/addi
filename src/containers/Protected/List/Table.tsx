@@ -91,7 +91,7 @@ export const Table: React.FC<Props> = ({
       <div className={styles.nav}>
         <div className={styles.counter}>
           <p>
-            Showing {page} de {pages}
+            Showing {page} of {pages}
           </p>
         </div>
         {!!pages && <Pagination currentPage={page} numberOfPages={pages} onChange={onChangePage} />}

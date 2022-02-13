@@ -20,6 +20,7 @@ export const PAGE = {
     LEADS: () => '/leads',
     PROSPECTS: () => '/prospects',
   },
+  LOGIN: () => '/login',
   ROOT: () => '/',
 };
 
