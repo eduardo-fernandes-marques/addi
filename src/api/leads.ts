@@ -1,17 +1,19 @@
-import { request } from '#/utils/request';
-
 import { Order as OrderProps } from '@components/Table';
+import { Pagination as PaginationProps } from '@containers/Protected/List';
+
+import { request } from '#/utils/request';
 
 export const getLeadsEndpoint = () => `leads`;
 export const getLeadByIdEndpoint = (id: string) => `leads/${id}`;
 export const validateStoreEndpoint = (id: string) => `leads/${id}/database`;
 export const validateJudicialRecordEndpoint = (id: string) => `leads/${id}/judicial`;
 export const getScoreEndpoint = (id: string) => `leads/${id}/score`;
+export const validateEndpoint = (id: string) => `leads/${id}/validate`;
 
 export type Lead = {
   identityNumber: string;
   birthDate: string;
-  name: Name;
+  name: string;
   email: string;
   updatedAt: string;
   prospect: boolean;
@@ -22,11 +24,6 @@ export type Lead = {
 export type Leads = {
   results: Lead[];
   pagination: Pagination;
-};
-
-export type Name = {
-  first: string;
-  last: string;
 };
 
 export type Pagination = {
@@ -42,10 +39,11 @@ export type Sort = {
 };
 
 export const SORT = {
+  name: 'name',
   updatedAt: 'updatedAt',
 };
 
-export const getLeads = async (searchParams?: Partial<Pagination>) => {
+export const getLeads = async (searchParams?: PaginationProps) => {
   const {
     sort: { sort, order },
     ...rest
@@ -55,7 +53,8 @@ export const getLeads = async (searchParams?: Partial<Pagination>) => {
     .get(getLeadsEndpoint(), {
       searchParams: {
         ...rest,
-        sort: `${sort}, ${order}`,
+        order,
+        sort,
       },
     })
     .json<Leads>();
@@ -74,18 +73,9 @@ export const validateJudicialRecord = async (id: string) => {
 };
 
 export const getScore = async (id: string) => {
-  return request.get(getScoreEndpoint(id)).json<number>();
+  return request.get(getScoreEndpoint(id)).json<Lead>();
 };
 
 export const validate = async (id: string) => {
-  const [store, judicialRecord] = await Promise.all([
-    validateStore(id),
-    validateJudicialRecord(id),
-  ]);
-
-  if (store && judicialRecord) {
-    return (await getScore(id)) > 60;
-  }
-
-  return false;
+  return request.get(validateEndpoint(id)).json<Lead>();
 };

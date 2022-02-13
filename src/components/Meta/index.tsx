@@ -1,4 +1,3 @@
-import React from 'react';
 import { Helmet, HelmetProps } from 'react-helmet';
 
 export type Props = HelmetProps & {

@@ -17,15 +17,15 @@ export const Server = () => {
   const server = new MirageServer({
     environment: process.env.NODE_ENV,
     fixtures: {
-      leads: fixtures.leads,
+      leads: Array(6)
+        .fill(fixtures.leads)
+        .reduce((acc, items) => [...acc, ...items], [] as Lead[]),
     },
     models: {
       leads: Model.extend<Lead[]>([]),
     },
     routes,
-    seeds: (context) => {
-      context.loadFixtures('leads');
-    },
+
     trackRequests: true,
     urlPrefix: APPLICATION.HOST_URL,
   });

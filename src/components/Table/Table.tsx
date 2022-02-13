@@ -2,11 +2,14 @@ import cn from 'clsx';
 import dlv from 'dlv';
 import * as uuid from 'uuid';
 
+import { ChevronDownIcon, ChevronUpIcon } from '../Icons';
+
 import { Button, Props as ButtonProps } from '@components/Button';
 
 import useSortBy, { Order, SortBy } from './hooks/useSortBy';
 import styles from './styles.module.scss';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Accessor<T = any> = (data: { [key: string]: T }, index?: number) => React.ReactNode;
 
 export type SortableColumn = {
@@ -20,14 +23,12 @@ export type SortableColumn = {
 export type Column = {
   label: React.ReactNode;
   width?: string;
-  fixedLeft?: boolean;
-  fixedRight?: boolean;
   align?: 'left' | 'center' | 'right';
   accessor: string | Accessor;
 } & SortableColumn;
 
 export type Row = {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export type Props = {
@@ -66,8 +67,6 @@ const Table: React.FC<Props> = ({
                 key={uuid.v4()}
                 style={{ width: column.width }}
                 className={cn({
-                  [styles['-fixed-left']]: column.fixedLeft,
-                  [styles['-fixed-right']]: column.fixedRight,
                   [styles['-left']]: column.align === 'left',
                   [styles['-center']]: column.align === 'center',
                   [styles['-right']]: column.align === 'right',
@@ -90,6 +89,11 @@ const Table: React.FC<Props> = ({
                     aria-label={column.sortAriaLabel}
                   >
                     {column.label}
+                    {sortBy.order === 'descending' && isSorted(i) ? (
+                      <ChevronDownIcon title="down" className={styles.icon} />
+                    ) : (
+                      <ChevronUpIcon title="down" className={styles.icon} />
+                    )}
                   </button>
                 )}
               </th>
@@ -120,8 +124,6 @@ const Table: React.FC<Props> = ({
                       key={uuid.v4()}
                       data-column=""
                       className={cn({
-                        [styles['-fixed-left']]: column.fixedLeft,
-                        [styles['-fixed-right']]: column.fixedRight,
                         [styles['-left']]: column.align === 'left',
                         [styles['-center']]: column.align === 'center',
                         [styles['-right']]: column.align === 'right',

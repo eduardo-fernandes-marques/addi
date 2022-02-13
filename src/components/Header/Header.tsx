@@ -1,5 +1,7 @@
+import { Input } from '../Input';
+
 export const Header: React.FC = () => {
-  return <div>Component not implemented</div>;
+  return <Input label="filter" />;
 };
 
 export default Header;

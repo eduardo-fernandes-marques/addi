@@ -1,0 +1,27 @@
+
+@import "@styles/variables";
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > nav {
+    width: 75%;
+  }
+
+  .counter {
+    margin-right: 0;
+    width: 30%;
+  }
+
+  @media screen and (max-width: $responsiveSm) {
+    > nav {
+      width: auto;
+    }
+
+    .counter {
+      width: auto;
+    }
+  }
+}

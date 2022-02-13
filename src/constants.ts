@@ -11,5 +11,20 @@ export const APPLICATION = {
 };
 
 export const PAGE = {
+  DETAIL: {
+    LEADS: (id: string) => `/leads/${id}`,
+    PROSPECTS: (id: string) => `/prospects/${id}`,
+  },
+  LIST: {
+    LEADS: () => '/leads',
+    PROSPECTS: () => '/prospects',
+  },
   ROOT: () => '/',
+};
+
+export const SCORE = 60;
+
+export const NOMECLATURES = {
+  DETAIL: { LEADS: 'LEAD', PROSPECTS: 'PROSPECT' },
+  LIST: { LEADS: 'LEADS', PROSPECTS: 'PROSPECTS' },
 };

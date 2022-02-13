@@ -4,8 +4,6 @@ $th-z-index: 2;
 
 .table {
   width: 100%;
-  table-layout: fixed;
-  min-width: 770px;
 
   > thead > tr > th,
   > tbody > tr > td {
@@ -62,63 +60,18 @@ $th-z-index: 2;
         width: 16px;
       }
     }
-
-    &::before {
-      bottom: 0;
-      content: "";
-      height: 6px;
-      left: 0;
-      position: absolute;
-      transition: opacity 0.25s ease-in-out;
-      width: 100%;
-      opacity: 0;
-    }
-
-    &.-sticky {
-      z-index: $th-z-index;
-
-      &::before {
-        background: linear-gradient(180deg, $primary 0%, transparent 100%);
-        opacity: 1;
-      }
-    }
   }
 
   > tbody > tr {
     &.-odd {
       > td,
       + tr[data-expanded-row] > td {
-        background: $white;
-      }
-    }
-
-    > td {
-      &.-empty {
-        text-align: center;
-      }
-
-      > button {
-        border-color: transparent;
-
-        > .icon {
-          transition: transform 0.25s;
-        }
-
-        &[aria-expanded="true"] {
-          > .icon {
-            transform: rotate(-180deg);
-          }
-        }
+        background: $terciary;
       }
     }
   }
 }
 
-@media (min-width: $responsiveXLg) {
-  .table {
-    min-width: 850px;
-  }
-}
 .table {
   th[data-column=""] {
     &[aria-sort="ascending"] .icon {
@@ -134,3 +87,4 @@ $th-z-index: 2;
     }
   }
 }
+

@@ -1,4 +1,4 @@
-@import "@styles/variables";
+@import '@styles/variables';
 
 .pagination {
   display: flex;
@@ -15,7 +15,7 @@
       }
 
       &:not(:last-child) {
-        margin-right: 1rem;
+        margin-right: 0.3rem;
       }
 
       > .item {
@@ -29,13 +29,24 @@
         align-items: center;
         font-weight: 1rem;
 
-        &[aria-current="true"] {
+        &[aria-current='true'] {
           color: $primary;
           border-color: $primary;
         }
 
         &:disabled {
           opacity: 0.5;
+        }
+      }
+
+      @media screen and (max-width: $responsiveSm) {
+        > .item {
+          padding: 0 0.3rem;
+          font-size: 0.8rem;
+        }
+
+        &:not(:last-child) {
+          margin-right: 0.1rem;
         }
       }
     }

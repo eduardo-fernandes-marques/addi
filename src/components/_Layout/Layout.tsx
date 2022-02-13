@@ -1,8 +1,8 @@
 import cn from 'clsx';
+import { isValidElement, Children } from 'react';
 
+import Container, { Props as ContainerProps } from './Container';
 import Content, { Props as ContentProps } from './Content';
-import Footer, { Props as FooterProps } from './Footer';
-import Header, { Props as HeaderProps } from './Header';
 import styles from './styles.module.scss';
 import Wrapper, { Props as WrapperProps } from './Wrapper';
 
@@ -11,13 +11,24 @@ export type DivProps = React.HTMLAttributes<HTMLDivElement>;
 export type Props = {
   Wrapper: React.FC<WrapperProps>;
   Content: React.FC<ContentProps>;
-  Footer: React.FC<FooterProps>;
-  Header: React.FC<HeaderProps>;
+  Container: React.FC<ContainerProps>;
 } & React.FC<DivProps>;
 
 const Layout: Props = ({ children, className, ...props }) => {
+  const isFull = !Children.toArray(children).some((component) => {
+    return (
+      isValidElement(component) &&
+      (component as React.ReactElement<unknown>).type === Container.name
+    );
+  });
+
   return (
-    <div className={cn(styles.layout, className)} {...props}>
+    <div
+      className={cn(styles.layout, className, {
+        [styles['-full']]: isFull,
+      })}
+      {...props}
+    >
       {children}
     </div>
   );
@@ -25,7 +36,6 @@ const Layout: Props = ({ children, className, ...props }) => {
 
 Layout.Wrapper = Wrapper;
 Layout.Content = Content;
-Layout.Footer = Footer;
-Layout.Header = Header;
+Layout.Container = Container;
 
 export default Layout;

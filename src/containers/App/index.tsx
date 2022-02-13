@@ -1,19 +1,16 @@
 import { StrictMode } from 'react';
-import { hot } from 'react-hot-loader/root';
 
-import { Meta } from '#/components/Meta';
+import { Meta } from '@components/Meta';
+
 import { Routes } from '#/routes';
 
-export const App: React.FC = hot(() => {
+export const App: React.FC = () => {
   return (
     <>
       <Meta />
-
-      <main>
-        <StrictMode>
-          <Routes />
-        </StrictMode>
-      </main>
+      <StrictMode>
+        <Routes />
+      </StrictMode>
     </>
   );
-});
+};

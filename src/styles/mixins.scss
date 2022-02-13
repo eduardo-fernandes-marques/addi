@@ -1,0 +1,27 @@
+@mixin media($point) {
+  @if $point == 'xlg' {
+    @media (max-width: $responsiveXLg) {
+      @content;
+    }
+  } @else if $point == 'md' {
+    @media (max-width: $responsiveLg) {
+      @content;
+    }
+  } @else if $point == 'lg' {
+    @media (max-width: $responsiveMd) {
+      @content;
+    }
+  } @else if $point == 'sm' {
+    @media (max-width: $responsiveSm) {
+      @content;
+    }
+  } @else if $point == 'xs' {
+    @media (max-width: $responsiveXs) {
+      @content;
+    }
+  } @else if $point == 'xxs' {
+    @media (max-width: $responsiveXxs) {
+      @content;
+    }
+  }
+}

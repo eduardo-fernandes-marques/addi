@@ -3,8 +3,9 @@ import cn from 'clsx';
 import styles from './styles.module.scss';
 
 export type Props = {
-  as?: React.ElementType<React.HTMLAttributes<HTMLElement>>;
+  as?: React.ElementType;
   footer?: React.ReactNode;
+  [key: string]: unknown;
 } & React.HTMLAttributes<HTMLElement>;
 
 const Card: React.FC<Props> = ({

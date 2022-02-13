@@ -162,21 +162,26 @@
               "caseInsensitive": true,
               "order": "asc"
             },
-            "groups": ["builtin", "external", "internal", "parent", "sibling"],
+            "groups": ["builtin", "external", "parent", "internal",  "sibling"],
             "newlines-between": "always",
             "pathGroups": [
               {
-                "pattern": "{@api/**}",
-                "group": "external",
-                "position": "after"
-              },
-              {
-                "pattern": "{@containers/**,@components/**}",
+                "pattern": "@api/**",
                 "group": "internal",
-                "position": "after"
+                "position": "before"
               },
               {
-                "pattern": "{@styles/**}",
+                "pattern": "{@api/**,@containers/**,@components/**,@styles/**}",
+                "group": "internal",
+                "position": "before"
+              },
+              {
+                "pattern": "@styles/**",
+                "group": "internal",
+                "position": "before"
+              },
+              {
+                "pattern": "{#/**}",
                 "group": "internal",
                 "position": "before"
               }

@@ -1,9 +1,9 @@
 @import "@styles/variables";
 
-
 .button {
   color: $primary;
   border: 1px solid transparent;
+  border-radius: 4px;
   display: inline-flex;
   position: relative;
   min-height: 56px;
@@ -15,15 +15,6 @@
   &:disabled {
     opacity: 0.5;
     pointer-events: none;
-  }
-
-  &:hover:not(:disabled),
-  &:focus:not(:disabled) {
-    background: darken($white, 5);
-
-    &:active {
-      background: darken($white, 7.5);
-    }
   }
 
   &.-block {

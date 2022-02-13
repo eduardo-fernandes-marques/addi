@@ -61,9 +61,10 @@ const Modal: React.FC<Props> = ({
       {...props}
     >
       <div className={styles.header}>
-        <Title as="h2" className={cn(styles.title, className)}>
+        <Title as="h1" className={cn(styles.title, className)}>
           {title}
         </Title>
+
         <button
           type="button"
           onClick={onClose}

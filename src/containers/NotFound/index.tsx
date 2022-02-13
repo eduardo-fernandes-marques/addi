@@ -1,5 +1,5 @@
 const NotFound: React.FC = () => {
-  return <div>Página não encontrada</div>;
+  return <div>Page not found</div>;
 };
 
 export default NotFound;

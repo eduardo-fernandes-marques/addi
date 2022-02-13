@@ -1,5 +1,6 @@
-import { ErrorBoundary } from '#/components/ErrorBoundary';
-import { App } from '#/containers/App';
+import { ErrorBoundary } from '@components/ErrorBoundary';
+import { App } from '@containers/App';
+
 import { unmountRender } from '#/utils/unmountRender';
 
 import './styles/global.scss';
