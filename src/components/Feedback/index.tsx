@@ -1,10 +1,8 @@
 import { isValidElement } from 'react';
 
-import { Meta } from '#/components/Meta';
-
-import { Button } from '@components/Button';
-
-import { Layout } from '../_Layout';
+import { Button } from '../Button';
+import { Layout } from '../Layout';
+import { Meta } from '../Meta';
 
 import styles from './styles.module.scss';
 
@@ -27,30 +25,28 @@ export const Feedback: React.FC<Props> = ({
 }) => {
   return (
     <Layout>
-      <Layout.Container>
-        <Layout.Content>
-          <Meta title={title} />
+      <Layout.Content>
+        <Meta title={title} />
 
-          <div className={styles.wrapper}>
-            <span data-testid="feedback-icon">{icon}</span>
+        <div className={styles.wrapper}>
+          <span data-testid="feedback-icon">{icon}</span>
 
-            <div data-testid="feedback-children">
-              {isValidElement(children) ? children : <p>{children}</p>}
-            </div>
-
-            {primaryButton || secondaryButton ? (
-              <>
-                {secondaryButton && <Button ghost appearance="primary" {...secondaryButton} />}
-                {primaryButton && <Button appearance="primary" {...primaryButton} />}
-              </>
-            ) : (
-              <Button block appearance="primary" onClick={handleReset}>
-                Back
-              </Button>
-            )}
+          <div data-testid="feedback-children">
+            {isValidElement(children) ? children : <p>{children}</p>}
           </div>
-        </Layout.Content>
-      </Layout.Container>
+
+          {primaryButton || secondaryButton ? (
+            <>
+              {secondaryButton && <Button ghost appearance="primary" {...secondaryButton} />}
+              {primaryButton && <Button appearance="primary" {...primaryButton} />}
+            </>
+          ) : (
+            <Button block appearance="primary" onClick={handleReset}>
+              Back
+            </Button>
+          )}
+        </div>
+      </Layout.Content>
     </Layout>
   );
 };

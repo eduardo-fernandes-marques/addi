@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { memo } from 'react';
 
 type Props = React.SVGProps<SVGSVGElement> & {
   title: string;
@@ -38,5 +38,5 @@ const SvgEmojiHappy = ({ title, ...rest }: Props) => {
   );
 };
 
-const MemoSvgEmojiHappy = React.memo(SvgEmojiHappy);
+const MemoSvgEmojiHappy = memo(SvgEmojiHappy);
 export default MemoSvgEmojiHappy;

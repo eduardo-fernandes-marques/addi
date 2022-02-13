@@ -1,6 +1,6 @@
 import { Input } from '../Input';
 
-export const Header: React.FC = () => {
+const Header: React.FC = () => {
   return <Input label="filter" />;
 };
 

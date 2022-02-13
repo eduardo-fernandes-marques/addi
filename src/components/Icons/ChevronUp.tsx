@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { memo } from 'react';
 
 type Props = React.SVGProps<SVGSVGElement> & {
   title: string;
@@ -33,5 +33,5 @@ const SvgChevronUp = ({ title, ...rest }: Props) => {
   );
 };
 
-const MemoSvgChevronUp = React.memo(SvgChevronUp);
+const MemoSvgChevronUp = memo(SvgChevronUp);
 export default MemoSvgChevronUp;

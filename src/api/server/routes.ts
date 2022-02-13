@@ -29,12 +29,21 @@ export function routes(this: Server) {
 
   this.get(getLeadsEndpoint(), (schema, { queryParams }) => {
     const { pagination } = fixtures;
-    const { size, page, sort, order, type } = queryParams;
+    const { size, page, sort, order, type, filter } = queryParams;
 
     const { models: results } = schema.where('leads', (lead) => {
-      return type === NOMECLATURES.LIST.LEADS
-        ? !(lead.attrs as LeadProps)?.prospect
-        : (lead.attrs as LeadProps)?.prospect;
+      let result =
+        type === NOMECLATURES.LIST.LEADS
+          ? !(lead as unknown as LeadProps)?.prospect
+          : (lead as unknown as LeadProps)?.prospect;
+
+      if (filter !== 'undefined' && filter) {
+        result = (lead as unknown as LeadProps)?.name
+          .toLowerCase()
+          .includes(filter.toLocaleLowerCase());
+      }
+
+      return result;
     });
 
     const start = Number(page) * Number(size);

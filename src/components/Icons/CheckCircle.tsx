@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { memo } from 'react';
 
 type Props = React.SVGProps<SVGSVGElement> & {
   title: string;
@@ -38,5 +38,5 @@ const SvgCheckCircle = ({ title, ...rest }: Props) => {
   );
 };
 
-const MemoSvgCheckCircle = React.memo(SvgCheckCircle);
+const MemoSvgCheckCircle = memo(SvgCheckCircle);
 export default MemoSvgCheckCircle;

@@ -1,7 +1,7 @@
 import cn from 'clsx';
 import { useState } from 'react';
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@components/Icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '../Icons';
 
 import styles from './styles.module.scss';
 

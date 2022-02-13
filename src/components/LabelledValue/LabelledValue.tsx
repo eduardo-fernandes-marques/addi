@@ -1,7 +1,6 @@
 import cn from 'clsx';
-import * as React from 'react';
 
-import Item, { Props as ItemProps } from './Item';
+import { Item, Props as ItemProps } from './Item';
 import styles from './styles.module.scss';
 
 export type ChilProps = {

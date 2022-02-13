@@ -1,4 +1,4 @@
-export const Footer: React.FC = () => {
+const Footer: React.FC = () => {
   return <div>Component not implemented</div>;
 };
 

@@ -2,9 +2,9 @@ import cn from 'clsx';
 import { useEffect, useState } from 'react';
 import ReactModal, { Props as ReactModalProps } from 'react-modal';
 
-import { Button, Props as ButtonProps } from '@components/Button';
-import { PlusCircleIcon } from '@components/Icons';
-import { Title } from '@components/Title';
+import { Button, Props as ButtonProps } from '../Button';
+import { PlusCircleIcon } from '../Icons';
+import { Title } from '../Title';
 
 import styles from './styles.module.scss';
 

@@ -3,9 +3,9 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 
 import { getLeadById, Lead as LeadProps } from '@api/leads';
 
-import { Layout } from '@components/_Layout';
 import { Button } from '@components/Button';
 import { LabelledValue } from '@components/LabelledValue';
+import { Layout } from '@components/Layout';
 import { Loader } from '@components/Loader';
 import { Spacing } from '@components/Spacing';
 import { Title } from '@components/Title';
@@ -88,7 +88,7 @@ export const Detail: React.FC<Props> = ({ setError }) => {
     <>
       <Loader data-testid="loader" show={state.loading} fullScreen />
 
-      <Title as="h1" size="large">
+      <Title as="h1" size="xxx-large">
         {NOMECLATURES.DETAIL[type]}
       </Title>
       <Spacing appearance="medium" />

@@ -1,8 +1,8 @@
 import { Server as MirageServer, Model } from 'miragejs';
 
-import { APPLICATION } from '#/constants';
-
 import { Lead } from '../leads';
+
+import { APPLICATION } from '#/constants';
 
 import fixtures from './fixtures.json';
 import { routes } from './routes';
@@ -25,7 +25,6 @@ export const Server = () => {
       leads: Model.extend<Lead[]>([]),
     },
     routes,
-
     trackRequests: true,
     urlPrefix: APPLICATION.HOST_URL,
   });

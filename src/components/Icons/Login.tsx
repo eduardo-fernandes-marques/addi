@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { memo } from 'react';
 
 type Props = React.SVGProps<SVGSVGElement> & {
   title: string;
@@ -38,5 +38,5 @@ const SvgLogin = ({ title, ...rest }: Props) => {
   );
 };
 
-const MemoSvgLogin = React.memo(SvgLogin);
+const MemoSvgLogin = memo(SvgLogin);
 export default MemoSvgLogin;

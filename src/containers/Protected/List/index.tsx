@@ -10,8 +10,8 @@ import {
   Leads as LeadsProps,
 } from '@api/leads';
 
-import { Layout } from '@components/_Layout';
 import { Button } from '@components/Button';
+import { Layout } from '@components/Layout';
 import { Loader } from '@components/Loader';
 import { Spacing } from '@components/Spacing';
 import { Row as RowProps } from '@components/Table';
@@ -19,15 +19,14 @@ import { Title } from '@components/Title';
 
 import { PAGE } from '#/constants';
 import { withFeedback, Props as WithFeedbackProps } from '#/hocs/withFeedback';
-import { withTemplate } from '#/hocs/withTemplate';
+import { withTemplate, Props as WithTemplateProps } from '#/hocs/withTemplate';
 
 import { Table } from './Table';
 
-export type Pagination = Omit<PaginationProps, 'pages'> & { type?: string };
-type Props = WithFeedbackProps;
+export type Pagination = { type?: string; filter?: string } & Omit<PaginationProps, 'pages'>;
+type Props = WithFeedbackProps & WithTemplateProps;
 
 type State = {
-  filter?: string;
   loading: boolean;
   results: LeadProps[];
   pages?: number;
@@ -39,8 +38,7 @@ type Action =
   | { type: 'FETCH_PENDING' }
   | { type: 'FETCH_SUCCEEDED'; payload: { data: LeadsProps } }
   | { type: 'PAGE_CHANGE'; payload: number }
-  | { type: 'SORT_CHANGE'; payload: SortProps }
-  | { type: 'FILTER_CHANGED'; payload: string };
+  | { type: 'SORT_CHANGE'; payload: SortProps };
 
 const INITIAL_STATE: State = {
   loading: false,
@@ -64,6 +62,7 @@ const reducer = (state: State, action: Action) => {
         pages: action.payload.data.pagination.pages,
         results: action.payload.data.results,
       };
+
     case 'PAGE_CHANGE':
       return {
         ...state,
@@ -88,7 +87,7 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-export const List: React.FC<Props> = ({ setSucceeded, setError }) => {
+export const List: React.FC<Props> = ({ setFilterVisible, filter, setSucceeded, setError }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -96,11 +95,18 @@ export const List: React.FC<Props> = ({ setSucceeded, setError }) => {
 
   const [state, dispatch] = useReducer(reducer, { ...INITIAL_STATE });
 
+  useEffect(() => {
+    setFilterVisible();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const fetch = useCallback(async () => {
     try {
       dispatch({ type: 'FETCH_PENDING' });
 
-      const data = await getLeads({ ...state.pagination, type });
+      console.log('filter: ', filter);
+
+      const data = await getLeads({ ...state.pagination, filter, type });
 
       dispatch({ payload: { data }, type: 'FETCH_SUCCEEDED' });
     } catch (_) {
@@ -111,7 +117,7 @@ export const List: React.FC<Props> = ({ setSucceeded, setError }) => {
         title: 'Error to fetch leads',
       });
     }
-  }, [setError, state.pagination, type]);
+  }, [filter, setError, state.pagination, type]);
 
   const handleSort = useCallback((sort: SortProps) => {
     dispatch({ payload: sort, type: 'SORT_CHANGE' });
@@ -163,7 +169,7 @@ export const List: React.FC<Props> = ({ setSucceeded, setError }) => {
     <>
       <Loader data-testid="loader" show={state.loading} fullScreen />
 
-      <Title as="h1" size="large">
+      <Title as="h1" size="xxx-large">
         {type}
       </Title>
       <Spacing appearance="medium" />
@@ -182,7 +188,7 @@ export const List: React.FC<Props> = ({ setSucceeded, setError }) => {
       <Spacing appearance="medium" />
 
       <Layout.Wrapper>
-        <Button block appearance="primary" onClick={() => navigate(PAGE.ROOT())}>
+        <Button block appearance="primary" onClick={() => navigate(PAGE.HOME())}>
           Back
         </Button>
       </Layout.Wrapper>

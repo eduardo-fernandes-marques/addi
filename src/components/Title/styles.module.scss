@@ -8,17 +8,17 @@
 
   @at-root h1#{&},
   &.-xxx-large {
-    font-size: 1rem;
+    font-size: 3rem;
   }
 
   @at-root h2#{&},
   &.-xx-large {
-    font-size: 1rem;
+    font-size: 2rem;
   }
 
   @at-root h3#{&},
   &.-x-large {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   @at-root h4#{&},
@@ -28,7 +28,7 @@
 
   @at-root h5#{&},
   &.-medium {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   &.-primary {

@@ -2,9 +2,8 @@ import cn from 'clsx';
 import dlv from 'dlv';
 import * as uuid from 'uuid';
 
+import { Button, Props as ButtonProps } from '../Button';
 import { ChevronDownIcon, ChevronUpIcon } from '../Icons';
-
-import { Button, Props as ButtonProps } from '@components/Button';
 
 import useSortBy, { Order, SortBy } from './hooks/useSortBy';
 import styles from './styles.module.scss';

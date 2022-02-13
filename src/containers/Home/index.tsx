@@ -9,7 +9,7 @@ import { withTemplate } from '#/hocs/withTemplate';
 export const Home: React.FC = () => {
   return (
     <>
-      <Title as="h1" size="large">
+      <Title as="h1" size="xxx-large">
         Home
       </Title>
       <Spacing appearance="medium" />

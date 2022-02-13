@@ -22,7 +22,7 @@ export const Routes: React.FC = () => {
     <Router>
       <Suspense fallback={<Loader show fullScreen />}>
         <Switch>
-          <Route path={PAGE.ROOT()} element={<LazyHome />} />
+          <Route path={PAGE.HOME()} element={<LazyHome />} />
 
           <Route path={PAGE.LIST.LEADS()} element={<LazyList />} />
           <Route path={PAGE.LIST.PROSPECTS()} element={<LazyList />} />

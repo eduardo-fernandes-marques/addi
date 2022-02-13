@@ -102,7 +102,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
           className={styles.label}
           data-label=""
         >
-          {label} {!required && !disabled && '(Opcional)'}
+          {label} {!required && !disabled && '(optional)'}
         </label>
       </div>
     );

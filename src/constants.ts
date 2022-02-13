@@ -15,6 +15,7 @@ export const PAGE = {
     LEADS: (id: string) => `/leads/${id}`,
     PROSPECTS: (id: string) => `/prospects/${id}`,
   },
+  HOME: () => '/home',
   LIST: {
     LEADS: () => '/leads',
     PROSPECTS: () => '/prospects',
