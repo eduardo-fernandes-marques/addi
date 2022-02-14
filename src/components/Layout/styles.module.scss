@@ -45,10 +45,6 @@
     margin-bottom: 2.5rem;
 
     @media screen and (max-width: $responsiveSm) {
-      width: auto;
-    }
-
-    @media screen and (max-width: $responsiveXs) {
       width: 90%;
     }
   }
