@@ -1,0 +1,12 @@
+@import "./colors";
+@import "./fonts";
+@import "./responsive";
+@import "./placeholders";
+@import "./functions";
+@import "./mixins";
+
+$z-index: (
+  modal: 10,
+  loader: 40,
+  toast: 50
+);

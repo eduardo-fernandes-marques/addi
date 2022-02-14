@@ -1,0 +1,90 @@
+@import "@styles/variables";
+
+$th-z-index: 2;
+
+.table {
+  width: 100%;
+
+  > thead > tr > th,
+  > tbody > tr > td {
+    height: 56px;
+    text-align: left;
+    font-weight: 300;
+
+    &.-right {
+      text-align: right;
+    }
+
+    &.-left {
+      text-align: left;
+    }
+
+    &.-center {
+      text-align: center;
+    }
+
+    &.-actions {
+      padding: 0;
+      width: 64px;
+
+      > a,
+      > button {
+        width: 56px;
+        height: 56px;
+      }
+    }
+  }
+
+  > thead > tr > th {
+    border-top: none;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+
+    > button {
+      position: relative;
+      border: none;
+      outline: none;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+
+      &:not([disabled]) {
+        cursor: pointer;
+      }
+
+      > .icon {
+        margin-left: 1rem;
+        color: $primary;
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+
+  > tbody > tr {
+    &.-odd {
+      > td,
+      + tr[data-expanded-row] > td {
+        background: $terciary;
+      }
+    }
+  }
+}
+
+.table {
+  th[data-column=""] {
+    &[aria-sort="ascending"] .icon {
+      :global(.arrow-up-down_svg__up) {
+        fill: $primary;
+      }
+    }
+
+    &[aria-sort="descending"] .icon {
+      :global(.arrow-up-down_svg__down) {
+        fill: $primary;
+      }
+    }
+  }
+}
+

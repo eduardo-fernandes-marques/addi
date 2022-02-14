@@ -1,0 +1,44 @@
+@import "@styles/variables";
+
+.card {
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 $primary;
+
+  > .content {
+    width: 100%;
+    display: block;
+    color: $primary;
+    text-decoration: none;
+    background: $white;
+    padding: #{1rem * 3};
+    text-align: left;
+    border: none;
+
+    @at-root a, button {
+      border: none;
+
+      &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        background: darken($white, 5);
+
+        &:active {
+          background: darken($white, 7.5);
+        }
+      }
+    }
+  }
+
+  > .footer {
+    width: 100%;
+    display: block;
+    text-decoration: none;
+    border-top: 1px solid $primary;
+    padding: #{1rem * 3} #{1rem * 2};
+  }
+}

@@ -1,0 +1,65 @@
+@import "@styles/variables";
+
+.title {
+  color: $primary;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 300;
+
+  @at-root h1#{&},
+  &.-xxx-large {
+    font-size: 3rem;
+  }
+
+  @at-root h2#{&},
+  &.-xx-large {
+    font-size: 2rem;
+  }
+
+  @at-root h3#{&},
+  &.-x-large {
+    font-size: 1.5rem;
+  }
+
+  @at-root h4#{&},
+  &.-large {
+    font-size: 1rem;
+  }
+
+  @at-root h5#{&},
+  &.-medium {
+    font-size: 0.8rem;
+  }
+
+  &.-primary {
+    color: $primary;
+  }
+
+  &.-secondary {
+    color: $white;
+  }
+
+  &.-x-light {
+    font-weight: 300;
+  }
+
+  &.-light {
+    font-weight: 300;
+  }
+
+  &.-normal {
+    font-weight: 400;
+  }
+
+  &.-semi-bold {
+    font-weight: 500;
+  }
+
+  &.-bold {
+    font-weight: 600;
+  }
+
+  > strong {
+    font-weight: 700;
+  }
+}

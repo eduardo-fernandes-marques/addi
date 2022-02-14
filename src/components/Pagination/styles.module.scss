@@ -1,0 +1,54 @@
+@import '@styles/variables';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  > ol {
+    display: flex;
+
+    > li {
+      &:not(:first-child):not(:last-child) {
+        > .item {
+          border-bottom: 2px solid $primary;
+        }
+      }
+
+      &:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      > .item {
+        text-align: center;
+        text-decoration: none;
+        padding: 0 1rem;
+        height: 40px;
+        border: none;
+        font-size: 1rem;
+        color: $primary;
+        align-items: center;
+        font-weight: 1rem;
+
+        &[aria-current='true'] {
+          color: $primary;
+          border-color: $primary;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+        }
+      }
+
+      @media screen and (max-width: $responsiveSm) {
+        > .item {
+          padding: 0 0.3rem;
+          font-size: 0.8rem;
+        }
+
+        &:not(:last-child) {
+          margin-right: 0.1rem;
+        }
+      }
+    }
+  }
+}

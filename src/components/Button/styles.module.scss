@@ -1,0 +1,100 @@
+@import "@styles/variables";
+
+.button {
+  color: $primary;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  display: inline-flex;
+  position: relative;
+  min-height: 56px;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &.-block {
+    width: 100%;
+  }
+
+  &.-primary {
+    border-color: $primary;
+    box-shadow: 0 4px 4px 0 rgba(50, 60, 50, 0.2);
+
+    &.-ghost {
+      color: $primary;
+      background: transparent;
+
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        background: darken($white, 5);
+        border-color: darken($primary, 10);
+
+        &:active {
+          background: darken($white, 7.5);
+          border-color: darken($primary, 20);
+        }
+      }
+    }
+
+    &:not(.-ghost) {
+      color: $white;
+      background: $primary;
+      border-color: $primary;
+
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        color: $white;
+        background: darken($primary, 10);
+        border-color: darken($primary, 10);
+
+        &:active {
+          background: darken($primary, 20);
+          border-color: darken($primary, 20);
+        }
+      }
+    }
+  }
+
+  &.-error {
+    border-color: $error;
+    box-shadow: 0 4px 4px 0 rgba(50, 60, 50, 0.2);
+
+    &.-ghost {
+      color: $error;
+      background: transparent;
+
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        background: darken($white, 5);
+        border-color: darken($error, 10);
+
+        &:active {
+          background: darken($white, 7.5);
+          border-color: darken($error, 20);
+        }
+      }
+    }
+
+    &:not(.-ghost) {
+      color: $white;
+      background: $error;
+
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        color: $white;
+        background: darken($error, 10);
+        border-color: darken($error, 10);
+
+        &:active {
+          background: darken($error, 20);
+          border-color: darken($error, 20);
+        }
+      }
+    }
+  }
+}

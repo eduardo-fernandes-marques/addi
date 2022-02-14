@@ -1,0 +1,16 @@
+$responsiveXxs: 320px;
+$responsiveXs: 375px;
+$responsiveSm: 768px;
+$responsiveMd: 1024px;
+$responsiveLg: 1440px;
+$responsiveXLg: 1920px;
+
+/* stylelint-disable */
+:export {
+  responsiveXxs: $responsiveXxs;
+  responsiveXs: $responsiveXs;
+  responsiveSm: $responsiveSm;
+  responsiveMd: $responsiveMd;
+  responsiveLg: $responsiveLg;
+  responsiveXLg: $responsiveXLg;
+}

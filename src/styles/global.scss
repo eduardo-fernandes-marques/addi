@@ -1,0 +1,33 @@
+@import '~sanitize.css/sanitize.css';
+@import '~sanitize.css/typography.css';
+@import '~sanitize.css/forms.css';
+@import './variables';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  color: $primary;
+  font-family: $typographyFamilyBase;
+
+  /* stylelint-disable-next-line */
+  *,
+  *::after,
+  *::before {
+    font-family: inherit;
+  }
+
+  /* stylelint-disable-next-line */
+  &*:focus {
+    outline: none;
+  }
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}

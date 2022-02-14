@@ -1,0 +1,25 @@
+@import "@styles/variables";
+
+.spacing {
+  height: 0;
+
+  &.-x-small {
+    height: 1rem;
+  }
+
+  &.-small {
+    height: #{1rem* 2};
+  }
+
+  &.-medium {
+    height: #{1rem * 3};
+  }
+
+  &.-large {
+    height: #{1rem * 4};
+  }
+
+  &.-x-large {
+    height: #{1rem * 5};
+  }
+}
