@@ -1,4 +1,5 @@
 import cn from 'clsx';
+import { Children, isValidElement, useMemo } from 'react';
 
 import Content, { Props as ContentProps } from './Content';
 import Footer, { Props as FooterProps } from './Footer';
@@ -16,8 +17,21 @@ export type Props = {
 } & React.FC<DivProps>;
 
 const Layout: Props = ({ children, className, ...props }) => {
+  const isSimple = useMemo(
+    () =>
+      !Children.toArray(children).some(
+        (component) =>
+          isValidElement(component) &&
+          (component as unknown as JSX.Element).type.name === Header.name
+      ),
+
+    [children]
+  );
+
+  console.log(!isSimple);
+
   return (
-    <div className={cn(styles.layout, className)} {...props}>
+    <div className={cn(styles.layout, className, { [styles['-simple']]: !isSimple })} {...props}>
       {children}
     </div>
   );

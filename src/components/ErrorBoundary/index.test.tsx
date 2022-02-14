@@ -44,6 +44,6 @@ describe('components > ErrorBoundary', () => {
     fireEvent.click(getByTestId('set-exception'));
     expect(getByTestId('error-boundary-fallback-dismiss')).toBeInTheDocument();
     fireEvent.click(getByTestId('error-boundary-fallback-dismiss'));
-    expect(window.location.pathname).toBe(PAGE.ROOT());
+    expect(window.location.pathname).toBe(PAGE.HOME());
   });
 });

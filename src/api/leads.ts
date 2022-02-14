@@ -3,7 +3,7 @@ import { Pagination as PaginationProps } from '@containers/Protected/List';
 
 import { request } from '#/utils/request';
 
-export const getLeadsEndpoint = () => `leads`;
+export const getLeadsEndpoint = () => 'leads';
 export const getLeadByIdEndpoint = (id: string) => `leads/${id}`;
 export const validateStoreEndpoint = (id: string) => `leads/${id}/database`;
 export const validateJudicialRecordEndpoint = (id: string) => `leads/${id}/judicial`;

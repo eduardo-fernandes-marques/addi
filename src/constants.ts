@@ -15,13 +15,12 @@ export const PAGE = {
     LEADS: (id: string) => `/leads/${id}`,
     PROSPECTS: (id: string) => `/prospects/${id}`,
   },
-  HOME: () => '/home',
+  HOME: () => '/',
   LIST: {
     LEADS: () => '/leads',
     PROSPECTS: () => '/prospects',
   },
   LOGIN: () => '/login',
-  ROOT: () => '/',
 };
 
 export const SCORE = 60;
@@ -30,3 +29,10 @@ export const NOMECLATURES = {
   DETAIL: { LEADS: 'LEAD', PROSPECTS: 'PROSPECT' },
   LIST: { LEADS: 'LEADS', PROSPECTS: 'PROSPECTS' },
 };
+
+export const LOGIN = {
+  EMAIL: 'eduardo.fernandes.marques@gmail.com',
+  PASSWORD: '12345',
+};
+
+export const AUTHENTICATION = 'isAuthenticated';

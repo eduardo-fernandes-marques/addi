@@ -86,7 +86,7 @@ export const Table: React.FC<Props> = ({
   return (
     <>
       <InternalTable rows={rows} columns={columns as ColumnProps[]} {...props} />
-      <Spacing appearance="small" />
+      <Spacing appearance="medium" />
 
       <div className={styles.nav}>
         <div className={styles.counter}>

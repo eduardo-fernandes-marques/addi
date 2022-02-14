@@ -104,8 +104,6 @@ export const List: React.FC<Props> = ({ setFilterVisible, filter, setSucceeded, 
     try {
       dispatch({ type: 'FETCH_PENDING' });
 
-      console.log('filter: ', filter);
-
       const data = await getLeads({ ...state.pagination, filter, type });
 
       dispatch({ payload: { data }, type: 'FETCH_SUCCEEDED' });

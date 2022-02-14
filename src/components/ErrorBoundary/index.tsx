@@ -18,7 +18,7 @@ export const Fallback: React.FC<Props> = ({
   title = 'Unexpected error!',
   children = 'Please, try later.',
   onClose = () => {
-    window.location.href = PAGE.ROOT();
+    window.location.href = PAGE.HOME();
   },
 }) => {
   return (

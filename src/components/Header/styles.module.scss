@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+
+  &.-without-filter {
+    justify-content: end;
+    width: 84%;
+  }
+}

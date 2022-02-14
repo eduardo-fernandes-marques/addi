@@ -1,12 +1,14 @@
 import cn from 'clsx';
 import { forwardRef, useState, cloneElement } from 'react';
 
+import { FieldSubscript } from './FieldSubscript';
 import styles from './styles.module.scss';
 
 export type Props = {
   icon?: React.ReactNode;
   type?: 'tel' | 'text' | 'date' | 'number' | 'search' | 'password';
   label: React.ReactNode;
+  hintMessage?: React.ReactNode;
   errorMessage?: React.ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -25,6 +27,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
       readOnly,
       maxLength,
       className,
+      hintMessage,
       errorMessage,
       ...props
     },
@@ -104,6 +107,23 @@ const Input = forwardRef<HTMLInputElement, Props>(
         >
           {label} {!required && !disabled && '(optional)'}
         </label>
+
+        <FieldSubscript>
+          <FieldSubscript.Group>
+            <FieldSubscript.Message
+              id={`${name}-input-error`}
+              show={!!errorMessage && !disabled}
+              invalid
+              aria-live="polite"
+              role="alert"
+            >
+              {errorMessage}
+            </FieldSubscript.Message>
+            <FieldSubscript.Message id={`${name}-input-hint`} show={!!hintMessage && !errorMessage}>
+              {hintMessage}
+            </FieldSubscript.Message>
+          </FieldSubscript.Group>
+        </FieldSubscript>
       </div>
     );
   }

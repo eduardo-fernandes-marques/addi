@@ -1,0 +1,12 @@
+@import '@styles/variables';
+
+.form {
+  margin: auto;
+  > * {
+    margin-bottom: 2rem;
+  }
+}
+
+.message {
+  color: $error;
+}

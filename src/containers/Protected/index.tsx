@@ -1,13 +1,13 @@
 import { Navigate } from 'react-router-dom';
 
-import { PAGE } from '#/constants';
+import { AUTHENTICATION, PAGE } from '#/constants';
 
 export type Props = {
   outlet: JSX.Element;
 };
 
 const ProtectedRoute = ({ outlet }: Props) => {
-  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const isAuthenticated = localStorage.getItem(AUTHENTICATION);
 
   if (isAuthenticated) {
     return outlet;

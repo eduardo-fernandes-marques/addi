@@ -13,7 +13,9 @@ import {
 } from '../leads';
 import { isProspect } from '../rules';
 
-import { NOMECLATURES } from '#/constants';
+import { postLoginEndpoint, Login as LoginProps } from '@api/login';
+
+import { AUTHENTICATION, LOGIN, NOMECLATURES } from '#/constants';
 import { sortBy } from '#/utils/sort';
 
 import fixtures from './fixtures.json';
@@ -107,6 +109,18 @@ export function routes(this: Server) {
   this.get(validateJudicialRecordEndpoint(':id'), () => Math.random() < 0.9);
 
   this.get(validateStoreEndpoint(':id'), () => Math.random() < 0.9);
+
+  this.post(postLoginEndpoint(), (_, request) => {
+    const { email, password } = JSON.parse(request.requestBody) as unknown as LoginProps;
+
+    if (email === LOGIN.EMAIL && password === LOGIN.PASSWORD) {
+      localStorage.setItem(AUTHENTICATION, 'true');
+
+      return true;
+    }
+
+    return false;
+  });
 
   this.passthrough();
 }

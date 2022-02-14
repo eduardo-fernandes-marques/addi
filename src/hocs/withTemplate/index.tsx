@@ -2,7 +2,8 @@ import { useCallback, useReducer } from 'react';
 import getDisplayName from 'react-display-name';
 import { Subtract } from 'utility-types';
 
-import { Input } from '@components/Input';
+import { Footer } from '@components/Footer';
+import { Header } from '@components/Header';
 import { Layout } from '@components/Layout';
 
 type Action = { type: 'SET_FILTER_VISIBLE' } | { type: 'FILTER_CHANGE'; payload: string };
@@ -72,9 +73,7 @@ export const withTemplate = <P extends Props = Props>(Component: React.Component
     return (
       <Layout>
         <Layout.Header>
-          <Layout.Wrapper>
-            {show && <Input label="filter" onChange={(value) => handleOnChange(value)} />}
-          </Layout.Wrapper>
+          <Header show={show} onChange={handleOnChange} />
         </Layout.Header>
         <Layout.Content>
           <Component
@@ -83,7 +82,9 @@ export const withTemplate = <P extends Props = Props>(Component: React.Component
             setFilterVisible={() => dispatch({ type: 'SET_FILTER_VISIBLE' })}
           />
         </Layout.Content>
-        <Layout.Footer>Footer</Layout.Footer>
+        <Layout.Footer>
+          <Footer />
+        </Layout.Footer>
       </Layout>
     );
   };
