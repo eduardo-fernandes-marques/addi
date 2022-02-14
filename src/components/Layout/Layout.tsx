@@ -28,8 +28,6 @@ const Layout: Props = ({ children, className, ...props }) => {
     [children]
   );
 
-  console.log(!isSimple);
-
   return (
     <div className={cn(styles.layout, className, { [styles['-simple']]: !isSimple })} {...props}>
       {children}
